@@ -1,4 +1,4 @@
-variable "aws_region" {
+variable "chosen_aws_region" {
     default = "us-west-2"
   }
 
