@@ -1,5 +1,6 @@
 provider "aws" {
     region = var.chosen_aws_region
+    profile = "default"
   }
 
   resource "aws_vpc" "main" {
