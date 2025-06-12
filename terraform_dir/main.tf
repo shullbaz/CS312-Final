@@ -1,6 +1,6 @@
 provider "aws" {
     region = var.aws_region
-    profile = "mc-temp"
+    profile = "mc"
   }
 
   resource "aws_vpc" "main" {

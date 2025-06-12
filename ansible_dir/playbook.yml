@@ -1,0 +1,38 @@
+---
+- name: Configure Game Container Environment
+  hosts: game_servers
+  become: true
+
+  tasks:
+    - name: Install system dependencies
+      package:
+        update_cache: yes
+        pkg: [curl, ca-certificates, gnupg, lsb-release]
+        state: present
+
+    - name: Deploy container setup script
+      copy:
+        src: scripts/setup_container_environment.sh
+        dest: /home/admin/container_setup.sh
+        mode: '0755'
+
+    - name: Execute container environment setup
+      command: ./container_setup.sh
+      args:
+        chdir: /home/admin
+
+    - name: Deploy container orchestration file
+      copy:
+        src: config/container_config.yml
+        dest: /home/admin/container_orchestration.yml
+
+    - name: Deploy management script
+      copy:
+        src: scripts/manage_server.sh
+        dest: /home/admin/server_manager.sh
+        mode: '0755'
+
+    - name: Launch server management
+      command: ./server_manager.sh
+      args:
+        chdir: /home/admin
