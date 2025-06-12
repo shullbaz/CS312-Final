@@ -1,5 +1,5 @@
 ---
-- name: Setup Minecraft Docker Server
+- name: Setup The Minecraft Server Via Docker
   hosts: minecraft
   become: true
 
@@ -10,29 +10,29 @@
         name: [curl, ca-certificates, gnupg, lsb-release]
         state: present
 
-    - name: Upload docker-setup.sh
+    - name: Upload the docker-setup.sh script
       copy:
         src: docker_files/docker-setup.sh
         dest: /home/ubuntu/docker-setup.sh
         mode: '0755'
 
-    - name: Run docker-setup.sh
+    - name: Run the docker-setup.sh
       shell: ./docker-setup.sh
       args:
         chdir: /home/ubuntu
 
-    - name: Upload docker-compose.yml
+    - name: Upload the docker-compose.yml
       copy:
         src: docker_files/docker-compose.yml
         dest: /home/ubuntu/docker-compose.yml
 
-    - name: Upload run-script.sh
+    - name: Upload the run-script.sh
       copy:
         src: docker_files/run-script.sh
         dest: /home/ubuntu/run-script.sh
         mode: '0755'
 
-    - name: Run run-script.sh
+    - name: Run the run-script.sh script
       shell: ./run-script.sh
       args:
         chdir: /home/ubuntu
