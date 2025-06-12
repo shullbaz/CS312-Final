@@ -12,7 +12,7 @@
 
     - name: Upload docker-setup.sh
       copy:
-        src: files/docker-setup.sh
+        src: docker_files/docker-setup.sh
         dest: /home/ubuntu/docker-setup.sh
         mode: '0755'
 
@@ -23,12 +23,12 @@
 
     - name: Upload docker-compose.yml
       copy:
-        src: files/docker-compose.yml
+        src: docker_files/docker-compose.yml
         dest: /home/ubuntu/docker-compose.yml
 
     - name: Upload run-script.sh
       copy:
-        src: files/run-script.sh
+        src: docker_files/run-script.sh
         dest: /home/ubuntu/run-script.sh
         mode: '0755'
 
