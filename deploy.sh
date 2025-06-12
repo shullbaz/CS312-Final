@@ -33,7 +33,7 @@ for i in {1..30}; do
 done
 
 echo "⚙️  Executing Ansible playbook..."
-cd ansible
+cd ansible_dir
 ansible-playbook -i inventory.ini playbook.yml
 
 echo "🎉 Deployment complete! Minecraft server address: $IP:25565"
