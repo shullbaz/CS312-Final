@@ -3,7 +3,7 @@
 set -e  # Exit on error
 set -u  # Exit on undefined variables
 
-KEY_NAME="Minecraft_Key"  # Set your key pair name here
+KEY_NAME="add_key_name"  # Set your key pair name here
 
 echo "🚀 Starting Terraform deployment for EC2 instance..."
 cd terraform_dir
