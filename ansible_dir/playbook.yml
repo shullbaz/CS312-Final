@@ -36,3 +36,8 @@
       command: ./server_manager.sh
       args:
         chdir: /home/admin
+    
+    - name: Deploy Docker Compose file
+      copy:
+        src: config/docker-compose.yml
+        dest: /home/ubuntu/docker-compose.yml

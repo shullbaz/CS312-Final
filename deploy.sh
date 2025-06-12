@@ -17,7 +17,7 @@ cd ..
 echo "📝 Generating Ansible inventory file..."
 cat > ansible_dir/inventory.ini <<EOF
 [minecraft]
-$IP ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/${KEY_NAME}.pem
+$IP ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/${KEY_NAME}.pem ansible_become=true
 EOF
 
 echo "⏳ Waiting for SSH access (timeout: 90s)..."
