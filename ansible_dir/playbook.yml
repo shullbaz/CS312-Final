@@ -1,43 +1,38 @@
 ---
-- name: Configure Game Container Environment
-  hosts: game_servers
+- name: Setup Minecraft Docker Server
+  hosts: minecraft
   become: true
 
   tasks:
-    - name: Install system dependencies
-      package:
+    - name: Update apt and install prerequisites
+      apt:
         update_cache: yes
-        pkg: [curl, ca-certificates, gnupg, lsb-release]
+        name: [curl, ca-certificates, gnupg, lsb-release]
         state: present
 
-    - name: Deploy container setup script
+    - name: Upload docker-setup.sh
       copy:
-        src: scripts/setup_container_environment.sh
-        dest: /home/admin/container_setup.sh
+        src: files/docker-setup.sh
+        dest: /home/ubuntu/docker-setup.sh
         mode: '0755'
 
-    - name: Execute container environment setup
-      command: ./container_setup.sh
+    - name: Run docker-setup.sh
+      shell: ./docker-setup.sh
       args:
-        chdir: /home/admin
+        chdir: /home/ubuntu
 
-    - name: Deploy container orchestration file
+    - name: Upload docker-compose.yml
       copy:
-        src: config/container_config.yml
-        dest: /home/admin/container_orchestration.yml
-
-    - name: Deploy management script
-      copy:
-        src: scripts/manage_server.sh
-        dest: /home/admin/server_manager.sh
-        mode: '0755'
-
-    - name: Launch server management
-      command: ./server_manager.sh
-      args:
-        chdir: /home/admin
-    
-    - name: Deploy Docker Compose file
-      copy:
-        src: config/docker-compose.yml
+        src: files/docker-compose.yml
         dest: /home/ubuntu/docker-compose.yml
+
+    - name: Upload run-script.sh
+      copy:
+        src: files/run-script.sh
+        dest: /home/ubuntu/run-script.sh
+        mode: '0755'
+
+    - name: Run run-script.sh
+      shell: ./run-script.sh
+      args:
+        chdir: /home/ubuntu
